@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindMe - 학교 분실물 찾기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=SUIT:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">학교 분실물 검색 서비스</p>
+          <h1>사진과 필터로, 헤매지 않고 바로 찾는 분실물 보드</h1>
+          <p class="hero-text">
+            로그인 없이 먼저 핵심 흐름부터 구현한 MVP입니다. 학생은 분실물을
+            빠르게 찾고, 등록자는 사진 한 장으로 정리하고, 관리자는 오래된 물건을
+            한 번에 정리할 수 있습니다.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#browse">분실물 찾기</a>
+            <a class="button ghost" href="#register">물건 등록하기</a>
+          </div>
+        </div>
+        <section class="hero-panel">
+          <div class="stat-card">
+            <span class="stat-label">현재 보관 중</span>
+            <strong id="activeCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">오늘 새 등록</span>
+            <strong id="todayCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">수령 완료</span>
+            <strong id="receivedCount">0</strong>
+          </div>
+        </section>
+      </header>
+
+      <main>
+        <section id="browse" class="panel panel-search">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Search</p>
+              <h2>최근 등록된 분실물</h2>
+            </div>
+            <div class="hint-chip">검색어를 나눠 비슷한 물건도 함께 보여줘요</div>
+          </div>
+
+          <div class="search-grid">
+            <label class="field wide">
+              <span>검색어</span>
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="예: 검은색 텀블러, 파란 우산, 에어팟 케이스"
+              />
+            </label>
+
+            <label class="field">
+              <span>종류</span>
+              <select id="typeFilter">
+                <option value="">전체</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>색상</span>
+              <select id="colorFilter">
+                <option value="">전체</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>발견 장소</span>
+              <select id="placeFilter">
+                <option value="">전체</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>상태</span>
+              <select id="statusFilter">
+                <option value="all">전체</option>
+                <option value="active">보관 중</option>
+                <option value="received">수령 완료</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="search-meta">
+            <p id="resultText">분실물을 불러오는 중입니다.</p>
+            <button id="resetFilters" class="text-button" type="button">
+              필터 초기화
+            </button>
+          </div>
+
+          <div id="itemGrid" class="item-grid"></div>
+        </section>
+
+        <section id="register" class="panel panel-register">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Register</p>
+              <h2>분실물 등록</h2>
+            </div>
+            <div class="hint-chip">사진 업로드 후 색상과 종류를 자동 추천해요</div>
+          </div>
+
+          <div class="register-layout">
+            <form id="registerForm" class="register-form">
+              <label class="field">
+                <span>물건 이름</span>
+                <input
+                  id="itemTitle"
+                  name="title"
+                  required
+                  placeholder="예: 검은 텀블러, 하늘색 우산"
+                />
+              </label>
+
+              <label class="field">
+                <span>사진 업로드</span>
+                <input id="itemImage" name="image" type="file" accept="image/*" />
+              </label>
+
+              <div class="double-grid">
+                <label class="field">
+                  <span>보관 위치</span>
+                  <input
+                    id="storageLocation"
+                    name="storageLocation"
+                    required
+                    placeholder="예: 2층 학생안전부"
+                  />
+                </label>
+
+                <label class="field">
+                  <span>발견 장소</span>
+                  <input
+                    id="foundPlace"
+                    name="foundPlace"
+                    required
+                    placeholder="예: 3학년 복도"
+                  />
+                </label>
+              </div>
+
+              <div class="triple-grid">
+                <label class="field">
+                  <span>발견 시간</span>
+                  <input id="foundAt" name="foundAt" type="datetime-local" required />
+                </label>
+
+                <label class="field">
+                  <span>종류</span>
+                  <input
+                    id="itemType"
+                    name="type"
+                    list="itemTypeOptions"
+                    placeholder="예: 텀블러, 우산, 필통, 기타"
+                  />
+                </label>
+
+                <label class="field">
+                  <span>색상</span>
+                  <input
+                    id="itemColor"
+                    name="color"
+                    placeholder="예: 검정, 파랑, 하양"
+                  />
+                </label>
+              </div>
+
+              <label class="field">
+                <span>메모</span>
+                <textarea
+                  id="itemDescription"
+                  name="description"
+                  rows="4"
+                  placeholder="브랜드, 스티커, 특징, 흠집 등을 적어두면 찾기 쉬워집니다."
+                ></textarea>
+              </label>
+
+              <div class="tag-preview">
+                <p class="tag-title">자동 추천 태그</p>
+                <div id="autoTagBox" class="tag-box">
+                  <span class="muted">사진이나 제목을 넣으면 추천 태그가 표시됩니다.</span>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="button primary" type="submit">분실물 등록하기</button>
+                <button id="seedSamples" class="button ghost" type="button">
+                  샘플 데이터 다시 채우기
+                </button>
+              </div>
+            </form>
+
+            <datalist id="itemTypeOptions">
+              <option value="텀블러"></option>
+              <option value="우산"></option>
+              <option value="필통"></option>
+              <option value="이어폰케이스"></option>
+              <option value="옷"></option>
+              <option value="책"></option>
+              <option value="지갑"></option>
+              <option value="안경"></option>
+              <option value="기타"></option>
+            </datalist>
+
+            <aside class="preview-panel">
+              <p class="preview-label">미리보기</p>
+              <div id="imagePreview" class="image-preview empty">
+                <span>사진 미리보기</span>
+              </div>
+
+              <div class="info-card">
+                <h3>현재 버전 범위</h3>
+                <ul>
+                  <li>로그인 없이 바로 검색/등록 가능</li>
+                  <li>수령 완료는 찾은 사용자가 직접 표시</li>
+                  <li>관리자 패널에서 오래된 물건 정리 가능</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="manage" class="panel panel-manage">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Manage</p>
+              <h2>관리자 정리 보드</h2>
+            </div>
+            <div class="hint-chip">오래된 물건, 수령 완료 물건을 빠르게 정리</div>
+          </div>
+
+          <div class="admin-actions">
+            <button id="archiveReceived" class="button ghost" type="button">
+              수령 완료 항목 숨기기
+            </button>
+            <button id="highlightStale" class="button ghost" type="button">
+              14일 이상 항목 보기
+            </button>
+          </div>
+
+          <div id="adminList" class="admin-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="itemCardTemplate">
+      <article class="item-card">
+        <div class="card-media">
+          <img class="card-image" alt="" />
+          <span class="card-status"></span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <h3 class="card-title"></h3>
+            <span class="card-age"></span>
+          </div>
+          <p class="card-description"></p>
+          <dl class="card-facts"></dl>
+          <div class="card-tags"></div>
+          <div class="card-actions">
+            <button class="button small primary receive-button" type="button">
+              수령 완료
+            </button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <template id="adminRowTemplate">
+      <article class="admin-row">
+        <div class="admin-row-copy">
+          <h3 class="admin-row-title"></h3>
+          <p class="admin-row-meta"></p>
+        </div>
+        <div class="admin-row-actions">
+          <button class="button small ghost restore-button" type="button">
+            복구
+          </button>
+          <button class="button small ghost remove-button" type="button">
+            삭제
+          </button>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
