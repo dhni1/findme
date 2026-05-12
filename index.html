@@ -26,48 +26,20 @@
   <body>
     <div class="page-shell">
       <header class="hero">
-        <div class="hero-copy">
-          <a class="brand-mark" href="#browse" aria-label="FINDME 홈">FINDME</a>
-          <p class="eyebrow">학교 분실물 검색 서비스</p>
-          <h1>최근 등록된 분실물</h1>
-          <p class="hero-text">
-            사진, 태그, 장소 필터를 한 화면에 모아 둔 학교 분실물 보드입니다.
-            찾는 사람은 빠르게 좁혀 보고, 등록하는 사람은 바로 추가할 수 있게
-            첫 화면을 정리했습니다.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#browse">분실물 찾기</a>
-            <a class="button ghost" href="#register">물건 등록하기</a>
-          </div>
-        </div>
+        <a class="brand-mark" href="#browse" aria-label="FINDME 홈">FINDME</a>
         <section class="hero-panel" aria-label="실시간 분실물 현황">
-          <div class="trend-intro">
-            <p class="section-kicker">Live Board</p>
-            <h2>실시간 분실물 현황</h2>
+          <div class="stat-card">
+            <span class="stat-label">현재 보관 중</span>
+            <strong id="activeCount">0</strong>
           </div>
-          <ol class="trend-board">
-            <li class="trend-note">
-              <span class="trend-rank">1</span>
-              <div class="trend-copy">
-                <span class="stat-label">현재 보관 중</span>
-                <strong id="activeCount">0</strong>
-              </div>
-            </li>
-            <li class="trend-note">
-              <span class="trend-rank">2</span>
-              <div class="trend-copy">
-                <span class="stat-label">오늘 새 등록</span>
-                <strong id="todayCount">0</strong>
-              </div>
-            </li>
-            <li class="trend-note">
-              <span class="trend-rank">3</span>
-              <div class="trend-copy">
-                <span class="stat-label">수령 완료</span>
-                <strong id="receivedCount">0</strong>
-              </div>
-            </li>
-          </ol>
+          <div class="stat-card">
+            <span class="stat-label">오늘 새 등록</span>
+            <strong id="todayCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">수령 완료</span>
+            <strong id="receivedCount">0</strong>
+          </div>
         </section>
       </header>
 
@@ -76,7 +48,7 @@
           <div class="panel-head">
             <div>
               <p class="section-kicker">Search</p>
-              <h2>분실물 검색 보드</h2>
+              <h2>최근 등록된 분실물</h2>
             </div>
             <div class="hint-chip">검색어를 입력해 분실물을 찾으세요</div>
           </div>

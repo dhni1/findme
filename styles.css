@@ -52,14 +52,13 @@ textarea {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 20px;
-  align-items: stretch;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
-.hero-copy,
 .hero-panel,
 .panel {
   border: 1px solid var(--line);
@@ -68,41 +67,18 @@ textarea {
   box-shadow: var(--shadow);
 }
 
-.hero-copy {
-  position: relative;
-  border-radius: 34px;
-  padding: 96px 38px 38px;
-  overflow: hidden;
-}
-
-.hero-copy::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.36), transparent 45%),
-    radial-gradient(circle at 75% 20%, rgba(204, 92, 42, 0.12), transparent 28%);
-  pointer-events: none;
-}
-
 .brand-mark {
-  position: absolute;
-  top: 26px;
-  left: 26px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 42px;
-  padding: 0 16px;
+  min-height: 38px;
+  padding: 0 4px;
   border-radius: 999px;
-  border: 1px solid rgba(45, 39, 31, 0.14);
-  background: rgba(255, 250, 242, 0.92);
   color: var(--text);
   text-decoration: none;
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 800;
-  letter-spacing: 0.24em;
-  box-shadow: 0 12px 24px rgba(83, 54, 23, 0.1);
+  letter-spacing: 0.22em;
 }
 
 .eyebrow,
@@ -116,19 +92,6 @@ textarea {
   color: var(--muted);
 }
 
-.hero-copy h1 {
-  margin: 14px 0 12px;
-  font-size: clamp(2rem, 4vw, 4rem);
-  line-height: 0.98;
-  max-width: 10ch;
-}
-
-.hero-text {
-  max-width: 44ch;
-  color: var(--muted);
-  line-height: 1.65;
-}
-
 .hero-actions,
 .form-actions,
 .admin-actions,
@@ -139,77 +102,24 @@ textarea {
 }
 
 .hero-panel {
-  border-radius: 34px;
-  padding: 24px 22px 28px;
+  width: min(320px, 100%);
+  border-radius: 24px;
+  padding: 14px;
   display: grid;
-  gap: 16px;
-  align-content: start;
-  background:
-    linear-gradient(180deg, rgba(255, 251, 246, 0.96), rgba(246, 235, 219, 0.92)),
-    var(--surface);
+  gap: 10px;
 }
 
-.trend-intro h2 {
-  margin: 6px 0 0;
-  font-size: 1.35rem;
+.stat-card {
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 16px;
 }
 
-.trend-board {
-  list-style: none;
-  margin: 0;
-  padding: 8px 4px 0 0;
-  display: grid;
-  gap: 14px;
-}
-
-.trend-note {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
-  align-items: center;
-  padding: 18px 18px 18px 16px;
-  border-radius: 22px;
-  border: 1px solid rgba(45, 39, 31, 0.1);
-  background: #fff8ef;
-  box-shadow: 0 16px 30px rgba(83, 54, 23, 0.12);
-  transform-origin: left center;
-}
-
-.trend-note:nth-child(1) {
-  transform: rotate(-2deg);
-}
-
-.trend-note:nth-child(2) {
-  transform: rotate(1.4deg) translateX(10px);
-  background: #fff4dc;
-}
-
-.trend-note:nth-child(3) {
-  transform: rotate(-1deg) translateX(4px);
-  background: #f7f0e6;
-}
-
-.trend-rank {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  background: rgba(204, 92, 42, 0.14);
-  color: var(--accent-deep);
-  font-weight: 800;
-  font-size: 1rem;
-}
-
-.trend-copy {
-  display: grid;
-  gap: 6px;
-}
-
-.trend-copy strong {
+.stat-card strong {
   display: block;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin-top: 6px;
+  font-size: 1.6rem;
   line-height: 1;
 }
 
@@ -563,7 +473,6 @@ textarea {
 }
 
 @media (max-width: 980px) {
-  .hero,
   .register-layout,
   .search-grid,
   .item-grid {
@@ -586,31 +495,19 @@ textarea {
     padding-top: 10px;
   }
 
-  .hero-copy,
   .hero-panel,
   .panel {
     border-radius: 24px;
   }
 
-  .hero-copy,
-  .panel {
-    padding: 20px;
-  }
-
-  .hero-copy {
-    padding-top: 84px;
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .brand-mark {
-    top: 20px;
-    left: 20px;
-  }
-
-  .trend-note,
-  .trend-note:nth-child(1),
-  .trend-note:nth-child(2),
-  .trend-note:nth-child(3) {
-    transform: none;
+    min-height: 30px;
+    padding: 0;
   }
 
   .panel-head,
@@ -622,5 +519,10 @@ textarea {
 
   .hint-chip {
     white-space: normal;
+  }
+
+  .hero-panel,
+  .panel {
+    padding: 20px;
   }
 }
