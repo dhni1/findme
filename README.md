@@ -25,6 +25,18 @@ python3 -m http.server 4173
 
 그 뒤 `http://localhost:4173`로 접속하면 됩니다.
 
+## Vercel 배포
+
+이 프로젝트는 정적 프론트엔드라서 Vercel에 바로 배포할 수 있습니다.
+
+1. Git 저장소를 Vercel에 import 합니다.
+2. Framework Preset은 `Other`로 둡니다.
+3. Build Command는 비워둡니다.
+4. Output Directory도 비워둡니다.
+5. Deploy 하면 루트의 `index.html`이 그대로 배포됩니다.
+
+`vercel.json`에는 깔끔한 URL과 기본 정적 배포 설정만 넣어두었습니다.
+
 ## 현재 제외한 것
 
 - 로그인
